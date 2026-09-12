@@ -1,0 +1,63 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report. Please search existing issues before creating a new one.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of the system is affected?
+      options:
+        - Backend (FastAPI)
+        - Frontend (React)
+        - Workflow Engine
+        - Auth / Security
+        - Docker / Deployment
+        - Documentation
+        - CI/CD
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: What happened? What did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Steps required to observe the bug.
+      placeholder: |
+        1. Start the backend with `uvicorn app.main:app`
+        2. Call `POST /api/v1/workflows` with payload ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, Node version, browser.
+      placeholder: Windows 11 · Python 3.11 · Node 20 · Chrome 130
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs / screenshots
+      description: Paste any error output, stack traces, or screenshots.
+      render: shell

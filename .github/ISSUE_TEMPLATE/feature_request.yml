@@ -1,0 +1,38 @@
+name: Feature Request
+description: Suggest an enhancement or new feature
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please check existing issues before submitting.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this feature solve? Who is it for?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: A clear description of the feature and how it should behave.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative designs or workarounds you considered.
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      description: Rough size of the change.
+      options:
+        - Small (isolated component/endpoint)
+        - Medium (cross-module feature)
+        - Large (architecture / new subsystem)
+    validations:
+      required: true

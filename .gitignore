@@ -1,0 +1,58 @@
+# Dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+.venv*/
+build/
+dist/
+*.whl
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.coverage.*
+bcp.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.production
+*.secret
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+npm-debug.log*
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Logs & temp
+logs/
+*.log
+
+# Docker
+postgres_data/
+redis_data/
+
+# Alembic
+alembic/versions/__pycache__/
+
+# Coverage reports
+coverage.xml

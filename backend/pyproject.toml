@@ -1,0 +1,23 @@
+[project]
+name = "ibam-backend"
+version = "0.1.0"
+description = "Intelligent Business Automation & Management System — FastAPI backend"
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+pythonpath = ["."]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+warn_return_any = true
+show_error_codes = true

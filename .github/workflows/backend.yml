@@ -1,0 +1,89 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["backend/**", ".github/workflows/backend.yml"]
+  pull_request:
+    branches: [main]
+    paths: ["backend/**", ".github/workflows/backend.yml"]
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  lint:
+    name: Lint & type-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          pip install -r requirements-dev.txt
+
+      - name: Lint (ruff check)
+        working-directory: backend
+        run: ruff check app tests
+
+      - name: Format (ruff format --check)
+        working-directory: backend
+        run: ruff format --check app tests
+
+      - name: Type check (mypy)
+        working-directory: backend
+        run: mypy app
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          pip install -r requirements-dev.txt
+
+      - name: Run pytest with coverage
+        working-directory: backend
+        run: |
+          pytest --cov=app --cov-report=term-missing --cov-report=xml
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: backend/coverage.xml
+          if-no-files-found: ignore
+
+  build:
+    name: Build & smoke-test image
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build backend image
+        run: |
+          docker build -t ibam-backend:ci ./backend
+
+      - name: Smoke-test image (imports resolve)
+        run: |
+          docker run --rm ibam-backend:ci python -c "from app.main import app; print(app.title)"
