@@ -81,7 +81,7 @@ See [docs/architecture.md](docs/architecture.md) for the detailed design.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/intelligent-business-automation.git
+git clone https://github.com/usamanazir1/intelligent-business-automation.git
 cd intelligent-business-automation
 ```
 
@@ -200,7 +200,7 @@ Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTIN
 - [ ] Multi-tenant support with isolated namespaces
 - [ ] Native mobile notifications
 
-Suggestions and feature requests are tracked via [GitHub Issues](https://github.com/your-org/intelligent-business-automation/issues).
+Suggestions and feature requests are tracked via [GitHub Issues](https://github.com/usamanazir1/intelligent-business-automation/issues).
 
 ## License
 
